@@ -39,18 +39,8 @@ export default {
     AppInput,
   },
   setup() {
-    const fruitOptions = ref({
-      Apple: "Apple",
-      Banana: "Banana",
-      Blueberry: "Blueberry",
-      Kiwi: "Kiwi",
-      Pear: "Pear",
-      Pineapple: "Pineapple",
-      Watermelon: "Watermelon",
-    });
     const tokenAddress = ref("");
     return {
-      fruitOptions,
       tokenAddress,
     };
   },

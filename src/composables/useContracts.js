@@ -34,7 +34,7 @@ const useContracts = (store, ethereumService, router = useRouter()) => {
     await store.dispatch("contracts/fetchNetworkName");
     let publicAddress = await store.dispatch("contracts/fetchAddress");
     await store.dispatch("contracts/fetchBalance", publicAddress);
-    let nonce = publicAddress;
+    let nonce = "AirBro";
     const signature = await store.dispatch("contracts/signNonce", nonce);
     if (signature === "rejected") {
       console.log(

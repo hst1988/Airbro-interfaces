@@ -1,0 +1,49 @@
+@import "constants";
+
+.prepare-tokens-wrap {
+    display: flex;
+  .head-text {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-family: $InterFontFamily;
+    font-size: 48px;
+    line-height: 72px;
+    color: #ffffff;
+    flex: 2;
+    .headline-primary-text {
+      font-weight: bold;
+    }
+  }
+  .button-component-wrap {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex: 3;
+
+        .headline-secondary-text {
+            font-size: 24px;
+            line-height: 32px;
+            color: #b8c2c7;
+          }
+      .tab-buttons-wrap {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 20px;
+        gap: 10px;
+        .tab-button {
+          width: 100%;
+          background: rgba(85, 76, 191, 0.2);
+          border: 2px solid #554cbf;
+          box-sizing: border-box;
+          font-weight: 900;
+          font-size: 22px;
+          line-height: 48px;
+          color: #ffffff;
+          cursor: pointer;
+        }
+      }
+  }
+}

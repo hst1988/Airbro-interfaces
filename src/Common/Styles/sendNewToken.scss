@@ -1,0 +1,25 @@
+@import "constants";
+
+.send-new-token-wrapper{
+  position: relative;
+  display: flex;
+  gap: 20px;
+  justify-content: space-evenly;
+  width: 100%;
+  flex-direction: column;
+  font-family: $InterFontFamily;
+  margin-top: 40px;
+  .token-data {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .create-token-button {
+    padding: 12px 18px;
+    background: #797e84;
+    color: #b8c2c7;
+    min-width: 180px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+}

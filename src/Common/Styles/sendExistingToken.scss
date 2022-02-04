@@ -1,0 +1,44 @@
+@import "constants";
+
+.send-existing-token-wrapper {
+  position: relative;
+  display: flex;
+  gap: 40px;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 40px;
+  flex-direction: column;
+  font-family: $InterFontFamily;
+  .label-text {
+    font-family: $InterFontFamily;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 48px;
+    color: #ffffff;
+  }
+  .current-network-wrap {
+    margin-top: 10px;
+    .current-network {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: #212121;
+      width: 100%;
+      height: 47px;
+      border: 1px solid;
+      font-size: 28px;
+      line-height: 40px;
+      color: #ffffff;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+  }
+  .next-step-button {
+    padding: 12px 18px;
+    background: #797e84;
+    color: #b8c2c7;
+    min-width: 180px;
+    cursor: pointer;
+  }
+}

@@ -1,4 +1,4 @@
-# airbro-interfaces
+# royaltizer
 
 ## Project setup
 ```

@@ -1,0 +1,46 @@
+@import "FontFamilies";
+@import "constants";
+@import "reset";
+
+html,
+body,
+#root {
+  height: 100%;
+  background: #272727;
+}
+.app-input {
+  position: relative;
+  width: 100%;
+}
+.label {
+  font-family: $InterFontFamily;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+  color: #ffffff;
+}
+.form-box-input {
+  width: 100%;
+  border: 2px solid #bcbcbc;
+  border-radius: 3px;
+  padding: 10px;
+  font-family: $InterFontFamily;
+  font-size: 20px;
+  line-height: 25px;
+  color: #B8C2C7;
+  background: #212121;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+}
+.form-box-select {
+  width: 100%;
+  border: 2px solid #bcbcbc;
+  border-radius: 3px;
+  padding: 8px;
+  font-family: $InterFontFamily;
+  color: #B8C2C7;
+  background: #212121;
+  font-size: 24px;
+  line-height: 40px;
+}

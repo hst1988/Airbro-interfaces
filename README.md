@@ -1,4 +1,4 @@
-# royaltizer
+# AirBro
 
 ## Project setup
 ```

@@ -2,10 +2,10 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 
 const CHAINS = {
-  1: "Mainnet",
-  3: "Ropsten",
-  137: "Polygon Mainnet",
-  80001: "Matic Mumbai",
+  1: "mainnet",
+  3: "ropsten",
+  137: "matic",
+  80001: "mumbai",
 };
 
 class EthereumService {

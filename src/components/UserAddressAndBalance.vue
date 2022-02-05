@@ -35,8 +35,8 @@ export default {
     };
     const currencyValue = () => {
       if (
-        networkName?.value === "Mainnet" ||
-        networkName?.value === "Ropsten"
+        networkName?.value === "mainnet" ||
+        networkName?.value === "ropsten"
       ) {
         return (currency.value = "ETH");
       } else {

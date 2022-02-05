@@ -1,21 +1,33 @@
 <template>
-  <div>
-    <b-table striped hover :items="items" dark></b-table>
+  <div class="table">
+    <b-table
+      striped
+      sticky-header
+      hover
+      :items="items"
+      :fields="fields"
+      dark
+      foot-clone
+    ></b-table>
   </div>
+  <!-- <div class="d-flex justify-content-center"  >
+  <b-spinner variant="light"></b-spinner>
+</div> -->
 </template>
 <script>
-import { ref } from "vue";
 export default {
+  props: {
+    items: {
+      type: Array,
+      default: () => [],
+    },
+    fields: {
+      type: Array,
+      default: () => [],
+    },
+  },
   setup() {
-    const items = ref([
-      { age: 40, first_name: "Dickerson", last_name: "Macdonald" },
-      { age: 21, first_name: "Larsen", last_name: "Shaw" },
-      { age: 89, first_name: "Geneva", last_name: "Wilson" },
-      { age: 38, first_name: "Jami", last_name: "Carney" },
-    ]);
-    return {
-      items,
-    };
+    return {};
   },
 };
 </script>

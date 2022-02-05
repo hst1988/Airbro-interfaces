@@ -35,9 +35,14 @@
   }
   .add-to-drop-button {
     padding: 12px 18px;
-    background: #797E84;
-    color: #B8C2C7;
+    background: #797e84;
+    color: #b8c2c7;
     min-width: 180px;
     cursor: pointer;
+  }
+  .total-list-num {
+    font-size: 32px;
+    line-height: 48px;
+    color: #ffffff;
   }
 }

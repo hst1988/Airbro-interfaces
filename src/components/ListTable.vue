@@ -1,10 +1,31 @@
 <template>
-  <div>
-    <b-table striped hover :items="items" dark></b-table>
+  <div class="table">
+    <b-table
+      striped
+      sticky-header
+      hover
+      :items="items"
+      :fields="fields"
+      dark
+      foot-clone
+    ></b-table>
   </div>
+  <!-- <div class="d-flex justify-content-center"  >
+  <b-spinner variant="light"></b-spinner>
+</div> -->
 </template>
 <script>
 export default {
+  props: {
+    items: {
+      type: Array,
+      default: () => [],
+    },
+    fields: {
+      type: Array,
+      default: () => [],
+    },
+  },
   setup() {
     return {};
   },

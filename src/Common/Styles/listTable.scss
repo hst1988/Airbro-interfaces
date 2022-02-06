@@ -1,5 +1,11 @@
 .table {
         max-height: 400px;
         min-height: 150px;
-        overflow-y:scroll;   
+        overflow-y:scroll;
 }
+.spinner-table {
+        position: absolute;
+        left: 50%;
+        top: 70%;
+        
+}   

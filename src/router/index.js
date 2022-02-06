@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import DropolinoHome from "@/views/DropolinoHome.vue";
+import AirBrooHome from "@/views/AirBroHome.vue";
 
 const routes = [
   {
     path: "/",
-    name: "DropolinoHome",
-    component: DropolinoHome,
+    name: "AirBrooHome",
+    component: AirBrooHome,
   },
 ];
 

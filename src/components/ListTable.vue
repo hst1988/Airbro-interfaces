@@ -10,9 +10,6 @@
       foot-clone
     ></b-table>
   </div>
-  <!-- <div class="d-flex justify-content-center"  >
-  <b-spinner variant="light"></b-spinner>
-</div> -->
 </template>
 <script>
 export default {

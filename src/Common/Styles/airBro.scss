@@ -1,0 +1,28 @@
+@import "constants";
+
+.air-bro-wrap {
+  display: flex;
+  font-family: $InterFontFamily;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 500px;
+  
+  .air-bro {
+    font-size: 160px;
+    line-height: 194px;
+    color: #ffffff;
+  }
+  .secondary-text {
+    font-size: 24px;
+    line-height: 32px;
+    color: #FFFFFF;
+    max-width: 500px;
+  }
+  .drop-it-button {
+    padding: 12px 18px;
+    background: #554cbf;
+    color: #b8c2c7;
+    min-width: 210px;
+    cursor: pointer;
+  }
+}

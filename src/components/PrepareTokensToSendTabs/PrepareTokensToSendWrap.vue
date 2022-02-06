@@ -1,5 +1,5 @@
 <template>
-  <div class="prepare-tokens-wrap">
+  <div class="prepare-tokens-wrap" id="prepareTokens">
     <div class="head-text">
       <p class="headline-primary-text">What is the airdrop?</p>
     </div>

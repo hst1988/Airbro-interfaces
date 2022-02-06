@@ -4,22 +4,32 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #212121;
   height: 80px;
-  .dropolino-logo {
-    height: 70px;
+  .airbro-logo {
+    height: 60px;
     margin-left: 60px;
+  }
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .powerd {
+      font-size: 24px;
+      line-height: 32px;  
+      color: #B8C2C7;
+      margin-left: 15px;
+    }
   }
 }
 .connect-metamask {
   width: auto;
-  background: #a5d7aa;
+  background: rgba(85, 76, 191, 0.2);
+  border: 2px solid #554CBF;
   color: #ffffff;
-  border-radius: 20px;
-  padding: 10px;
-  font-size: 18px;
-  line-height: 24px;
-  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-  margin-right: 15px;
+  padding: 10px 25px ;
+  font-size: 24px;
+  line-height: 40px;
+  margin-right: 40px;
   cursor: pointer;
 }

@@ -1,11 +1,13 @@
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
+import ABI from "../contracts/conrtactAbi.json";
+import { ADDRESSES } from "../contracts/addresses.js";
 
 const CHAINS = {
   1: "mainnet",
   3: "ropsten",
-  137: "matic",
-  80001: "mumbai",
+  137: "polygon",
+  80001: "polygon testnet",
 };
 
 class EthereumService {
@@ -13,6 +15,8 @@ class EthereumService {
     this.chainId = chainId;
     this.networkProvider = {};
     this.providerOptions = {};
+    this.dropAbi = ABI["abi"];
+    this.airDropAddress = ADDRESSES["AirBroContractAddressMumbai"];
     this.web3Modal = new Web3Modal({
       cacheProvider: true,
       providerOptions: this.providerOptions,
@@ -73,7 +77,6 @@ class EthereumService {
 
   async getNetworkName() {
     const network = await this.getNetwork();
-    console.log(CHAINS[network.chainId]);
     return CHAINS[network.chainId] || "Unsupported network";
   }
 
@@ -110,6 +113,49 @@ class EthereumService {
       const provider = new ethers.providers.Web3Provider(this.networkProvider);
       const signer = provider.getSigner();
       return signer.signMessage(nonce);
+    }
+    throw new Error("No network provider found!");
+  }
+  async dropNftsToNftHolders(
+    rewardedNftCollection,
+    newNftCollectionName,
+    newNftCollectionSymbol,
+    newNftSupply,
+    baseUri
+  ) {
+    await this.checkCachedProvider();
+    if (Object.keys(this.networkProvider).length > 0) {
+      const provider = new ethers.providers.Web3Provider(this.networkProvider);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        this.airDropAddress,
+        this.dropAbi,
+        signer
+      );
+
+      let tx = null;
+      try {
+        tx = await contract.dropNftsToNftHolders(
+          rewardedNftCollection,
+          newNftCollectionName,
+          newNftCollectionSymbol,
+          newNftSupply,
+          baseUri
+        );
+        await tx.wait();
+        return tx;
+      } catch (error) {
+        if (error.reason === "repriced") {
+          const replacement = await provider.getTransaction(
+            error.replacement.hash
+          );
+          await replacement.wait();
+          return replacement;
+        }
+        return {
+          hash: "rejected",
+        };
+      }
     }
     throw new Error("No network provider found!");
   }

@@ -1,14 +1,12 @@
 <template>
   <div class="air-drop-init-wrap" id="finishIt">
     <div class="head-text">
-      <p class="headline-primary-text">Airdrop initiated...</p>
+      <p class="headline-primary-text">Initiate airdrop...</p>
     </div>
     <div class="reward-user-wrap">
       <div>
         <p class="headline-secondary-text">
-          Airdrop has started, it might take a while... To be able to download
-          the list of addresses that received the airdrop, please stay on the
-          page while transaction is completed.
+          Airdrop has started, it might take a while...
         </p>
       </div>
       <div class="spinner">

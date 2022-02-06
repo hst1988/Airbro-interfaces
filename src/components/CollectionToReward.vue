@@ -44,8 +44,7 @@
           />
           <p class="info-text">
             Number of airdrop items is significantly lower than number of
-            potential receivers. Items will be assigned based on order in smart
-            contract / random order.
+            potential receivers. Items will be assigned with the "first come, first served" logic.
           </p>
         </div>
         <div class="info-box">
@@ -57,7 +56,7 @@
         </div>
         <div>
           <app-button
-            text="Approve and drop it!"
+            text="Approve"
             class="approve-drop-button"
             :disabled="!tableListLength"
             v-scroll-to="'#finishIt'"

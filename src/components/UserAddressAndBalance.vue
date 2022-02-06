@@ -1,12 +1,27 @@
 <template>
   <div class="address-balance-wrapper">
-    <div class="network">{{ networkName }}</div>
-    <div class="balance">
-      {{ parseFloat(balance.default).toFixed(5) }} | {{ currencyValue() }}
+    <div class="network">
+      <img src="@/Common/Icons/matic2.png" alt="maticIcon" class="matic-icon" />
+      <div>{{ capitalizeFirstLetter(networkName) }} Network</div>
     </div>
-    <div class="address">{{ reduceAddress(6, 4) }}</div>
+    <div class="address">
+      <div class="avatar-wrap">
+        <img
+          src="@/Common/Icons/avatar.png"
+          alt="avatarIcon"
+          class="avatar-icon"
+        />
+        <div>{{ reduceAddress(6, 4) }}</div>
+      </div>
+      <div @click="disconnect">
+        <img
+          src="@/Common/Icons/disconnectIcon.png"
+          alt="disconnectIcon"
+          class="disconnect-icon"
+        />
+      </div>
+    </div>
   </div>
-  <p class="disconect" @click="disconnect">Dissconect your wallet</p>
 </template>
 
 <script>
@@ -49,7 +64,9 @@ export default {
       await ethereumService.disconnectProvider();
       await router.push("/");
     };
-
+    const capitalizeFirstLetter = (string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
     onMounted(async () => {
       await store.dispatch("contracts/fetchAddress");
       await store.dispatch("contracts/fetchBalance", address.value);
@@ -62,6 +79,7 @@ export default {
       networkName,
       currencyValue,
       disconnect,
+      capitalizeFirstLetter,
     };
   },
 };

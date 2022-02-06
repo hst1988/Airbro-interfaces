@@ -1,17 +1,18 @@
 <template>
   <div class="menu-bar">
-    <div>
+    <div class="logo-wrap">
       <img
-        src="@/Common/Icons/dropolinoLogo.png"
-        alt="dropolinoLogo"
-        class="dropolino-logo"
+        src="@/Common/Icons/AirBroIcon.png"
+        alt="AirBroLogo"
+        class="airbro-logo"
       />
+      <div class="powerd">Powered by NFTizer</div>
     </div>
     <div class="connect-wrapper">
       <app-button
         v-if="!address"
         buttonClass="connect-metamask"
-        text="Connect to a wallet"
+        text="Connect wallet"
         @click="loginOrSignUp()"
       />
       <user-address-and-balance v-else />

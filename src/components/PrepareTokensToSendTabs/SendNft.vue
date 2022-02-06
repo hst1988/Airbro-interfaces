@@ -21,15 +21,21 @@
         text="Add to the drop"
         class="add-to-drop-button"
         @click="getNftList"
+        :disabled="collectionAddress ? false : true"
       />
     </div>
     <div class="list-of-drop-items">
       <p class="total-list-num">
-        List for airdrop items {{ nftListTotal.nftListTotal || 0 }}
+        List for airdrop items {{ nftListTotal || 0 }}
       </p>
-      <list-table :items="tableItems" :fields="tableFields" />
+      <list-table :items="tableNftItems" :fields="tableFields" />
       <div>
-        <app-button text="Looks good, next step" class="add-to-drop-button" />
+        <app-button
+          text="Looks good, next step"
+          class="add-to-drop-button"
+          :disabled="nftList.length === 0"
+          v-scroll-to="'#reward'"
+        />
       </div>
     </div>
   </div>
@@ -41,7 +47,7 @@ import ListTable from "@/components/ListTable.vue";
 import { useStore } from "vuex";
 import useMoralis from "@/composables/useMoralis";
 import useContracts from "@/composables/useContracts";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 export default {
   name: "SendNft",
@@ -52,7 +58,8 @@ export default {
   },
   setup() {
     const store = useStore();
-    const { nftList, tableItems, nftListTotal } = useMoralis(store);
+    const { fetchNft, nftList, tableNftItems, nftListTotal } =
+      useMoralis(store);
     const { address, networkName } = useContracts(store);
     const tableFields = ref([
       { key: "Item_name", label: "Item Name" },
@@ -60,17 +67,21 @@ export default {
       { key: "NFT_ID", label: "NFT ID" },
     ]);
     const collectionAddress = ref("");
+    const spinner = ref(false);
     const getNftList = async () => {
       const options = {
         chain: networkName?.value,
         address: collectionAddress.value || address.value,
       };
-
-      store.dispatch("moralis/fetchNft", options);
+      fetchNft(options);
+      collectionAddress.value = "";
     };
+    watch(nftList, (newValue) => {
+      newValue.length > 0 ? (spinner.value = false) : (spinner.value = true);
+    });
     return {
       getNftList,
-      tableItems,
+      tableNftItems,
       collectionAddress,
       nftList,
       tableFields,

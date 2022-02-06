@@ -1,5 +1,5 @@
 <template>
-  <div class="collection-reward-wrap">
+  <div class="collection-reward-wrap" id="reward">
     <div class="head-text">
       <p class="headline-primary-text">Who gets the drop?</p>
     </div>
@@ -21,12 +21,22 @@
         />
       </div>
       <div>
-        <app-button text="Add to the list" class="add-to-list-button" />
+        <app-button
+          text="Add to the list"
+          class="add-to-list-button"
+          @click="addAddressToReward"
+          :disabled="rewardAddress ? false : true"
+        />
       </div>
       <div class="list-of-drop-items">
-        <p>Eligible collections</p>
-        <list-table />
-        <div class="info">
+        <div>
+          <p class="text">Eligible collections</p>
+          <list-table
+            :items="tableAddressesToRewardList"
+            :fields="tableFields"
+          />
+        </div>
+        <div class="info" v-if="nftListTotal < addresesToRewardTotalItems[0]">
           <img
             src="@/Common/Icons/toolTipIcon.png"
             alt="info-icon"
@@ -38,9 +48,20 @@
             contract / random order.
           </p>
         </div>
-        <div class="info-box">Drop 34 items to 5670 addresses</div>
+        <div class="info-box">
+          <span v-if="tableListLength">
+            Drop {{ nftListTotal }} items to
+            {{ addresesToRewardTotalItems[0] }}
+            addresses</span
+          >
+        </div>
         <div>
-          <app-button text="Approve and drop it!" class="approve-drop-button" />
+          <app-button
+            text="Approve and drop it!"
+            class="approve-drop-button"
+            :disabled="!tableListLength"
+            v-scroll-to="'#finishIt'"
+          />
         </div>
       </div>
     </div>
@@ -50,6 +71,10 @@
 import AppButton from "@/elements/AppButton";
 import AppInput from "@/elements/AppInput";
 import ListTable from "@/components/ListTable.vue";
+import { useStore } from "vuex";
+import useMoralis from "@/composables/useMoralis";
+import useContracts from "@/composables/useContracts";
+import { computed, ref } from "vue";
 
 export default {
   components: {
@@ -58,7 +83,43 @@ export default {
     ListTable,
   },
   setup() {
-    return {};
+    const store = useStore();
+    const {
+      fetchAddresesToReward,
+      tableAddressesToRewardList,
+      nftListTotal,
+      addresesToRewardTotalItems,
+    } = useMoralis(store);
+    const { networkName } = useContracts(store);
+
+    const rewardAddress = ref("");
+    const tableFields = ref([
+      { key: "Collection_Name", label: "Collection name (no of addresses)" },
+      { key: "Collection_Address", label: "Collection address" },
+    ]);
+
+    const tableListLength = computed(
+      () => tableAddressesToRewardList.value.length > 0
+    );
+
+    const addAddressToReward = () => {
+      const options = {
+        chain: networkName?.value,
+        address: rewardAddress.value,
+      };
+      fetchAddresesToReward(options);
+      rewardAddress.value = "";
+    };
+
+    return {
+      addAddressToReward,
+      rewardAddress,
+      tableFields,
+      tableListLength,
+      nftListTotal,
+      tableAddressesToRewardList,
+      addresesToRewardTotalItems,
+    };
   },
 };
 </script>

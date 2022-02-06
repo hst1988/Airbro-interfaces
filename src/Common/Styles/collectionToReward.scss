@@ -34,12 +34,13 @@
   .approve-drop-button {
     padding: 12px 18px;
     background: #554CBF;
-    color: #b8c2c7;
+    color: #FFFFFF;
     min-width: 210px;
     cursor: pointer;
     &:disabled {
       background: #797e84;
       cursor: default;
+      color: #b8c2c7;
     }
   }
   .info-box {

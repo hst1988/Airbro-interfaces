@@ -16,7 +16,7 @@ class EthereumService {
     this.networkProvider = {};
     this.providerOptions = {};
     this.dropAbi = ABI["abi"];
-    this.airDropAddress = ADDRESSES["AirBroContractAddressMumbai"];
+    this.airDropAddress = ADDRESSES["AirBroContractAddress"];
     this.web3Modal = new Web3Modal({
       cacheProvider: true,
       providerOptions: this.providerOptions,

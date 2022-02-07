@@ -10,6 +10,7 @@ const initialState = () => ({
   tableAddressesToRewardList: [],
   addresesToRewardTotalItems: [],
   errors: [],
+  collectionAddressToSend: "",
 });
 const state = initialState();
 
@@ -40,6 +41,9 @@ const getters = {
   },
   getAddresesToRewardTotalItems(state) {
     return state.addresesToRewardTotalItems;
+  },
+  getCollectionAddressToSend(state) {
+    return state.collectionAddressToSend;
   },
 };
 
@@ -74,6 +78,9 @@ const mutations = {
   setAddresesToRewardTotalItems(state, addresesToRewardTotalItems) {
     state.addresesToRewardTotalItems.push(addresesToRewardTotalItems);
   },
+  setCollectionAddressToSend(state, collectionAddressToSend) {
+    state.collectionAddressToSend = collectionAddressToSend;
+  },
   resetState(state) {
     Object.assign(state, initialState());
   },
@@ -83,13 +90,12 @@ const actions = {
   resetState({ commit }) {
     commit("resetState");
   },
-  async fetchNft({ commit }, options) {
+  async fetchNft({ commit }, config) {
+    commit("setCollectionAddressToSend", config.collectionAddressToSend);
     try {
-      const response = await Moralis.Web3API.account.getNFTs(options);
+      const response = await Moralis.Web3API.account.getNFTs(config.options);
       commit("setNftList", response.result);
-      commit("setNftListTotal", response.total);
-      commit("setGiftCollectionName", response.result[0].name);
-      commit("setGiftCollectionSymbol", response.result[0].symbol);
+
       const fixUrl = (url) => {
         if (url.startsWith("ipfs")) {
           return (
@@ -107,7 +113,15 @@ const actions = {
           return str;
         }
       };
-      response.result.forEach((nft) => {
+      let arrayOfClollectionaddres = response.result.filter(
+        (e) => e.token_address === config.collectionAddressToSend
+      );
+
+      commit("setNftListTotal", arrayOfClollectionaddres.length);
+      commit("setGiftCollectionName", arrayOfClollectionaddres[0].name);
+      commit("setGiftCollectionSymbol", arrayOfClollectionaddres[0].symbol);
+
+      arrayOfClollectionaddres.forEach((nft) => {
         let url = fixUrl(nft.token_uri);
         fetch(url)
           .then((res) => res.json())

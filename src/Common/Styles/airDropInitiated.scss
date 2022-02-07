@@ -4,7 +4,7 @@
   display: flex;
   font-family: $InterFontFamily;
   margin-top: 70px;
-  padding-bottom: 70px;
+  padding: 40px 0 70px;
 
   .head-text {
     display: flex;
@@ -49,6 +49,7 @@
     .complete-drop-button {
       padding: 12px 18px;
       background: #554CBF;
+      font-weight: bold;
       color: #FFFFFF;
       min-width: 210px;
       cursor: pointer;

@@ -1,12 +1,14 @@
 @import "constants";
 
 .home-page {
-  display: inline-flex;
+  display: flex;
+  .cover-image-wrap {
+    flex: 1;
+  }
 }
 
 .cover-image {
-  width: 250px;
-  height: 400px;
+  width: 330px;
   margin-left: 150px;
 }
 
@@ -16,6 +18,7 @@
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 500px;
+  flex: 1;
 
   .air-bro {
     font-size: 160px;

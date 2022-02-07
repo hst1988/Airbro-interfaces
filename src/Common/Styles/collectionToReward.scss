@@ -4,6 +4,7 @@
   display: flex;
   font-family: $InterFontFamily;
   margin-top: 70px;
+  padding-top: 40px;
   .head-text {
     display: flex;
     width: 100%;
@@ -35,6 +36,7 @@
     padding: 12px 18px;
     background: #554CBF;
     color: #FFFFFF;
+    font-weight: bold;
     min-width: 210px;
     cursor: pointer;
     &:disabled {

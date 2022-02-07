@@ -12,11 +12,13 @@
         v-scroll-to="'#prepareTokens'"
       />
     </div>
-    <img
-      src="@/Common/Icons/CoverImage.png"
-      alt="CoverImage"
-      class="cover-image"
-    />
+    <div class="cover-image-wrap">
+      <img
+        src="@/Common/Icons/CoverImage.png"
+        alt="CoverImage"
+        class="cover-image"
+      />
+    </div>
   </div>
 </template>
 <script>

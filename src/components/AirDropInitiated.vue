@@ -23,7 +23,7 @@
         <app-button
           text="Complete the drop"
           class="complete-drop-button"
-          :disabled="!giftNftCollectionSymbol ? true : false"
+          :disabled="tableAddressesToRewardList.length === 0"
           @click="
             rewardNftToNftHolders(
               rewardedNftCollection,
@@ -59,6 +59,7 @@ export default {
       nftListTotal,
       giftCollectionSymbol,
       giftCollectionName,
+      tableAddressesToRewardList,
     } = useMoralis(store);
     const { networkName } = useContracts(store);
 
@@ -80,6 +81,7 @@ export default {
       giftNftSupply,
       txHash,
       isTransactionFinished,
+      tableAddressesToRewardList,
     };
   },
 };

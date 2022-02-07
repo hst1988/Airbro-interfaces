@@ -22,7 +22,7 @@ const useMoralis = (store) => {
     () => store.getters["moralis/getAddresesToRewardTotalItems"]
   );
 
-  const fetchNft = (object) => store.dispatch("moralis/fetchNft", object);
+  const fetchNft = (config) => store.dispatch("moralis/fetchNft", config);
   const fetchAddresesToReward = (object) =>
     store.dispatch("moralis/fetchAddresesToReward", object);
 

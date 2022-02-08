@@ -1,7 +1,20 @@
 <template>
   <div class="address-balance-wrapper">
     <div class="network">
-      <img src="@/Common/Icons/matic2.png" alt="maticIcon" class="matic-icon" />
+      <div v-if="networkName === 'mainnet' || networkName === 'ropsten'">
+        <img
+          src="@/Common/Icons/ethIconBlue.png"
+          alt="ethIcon"
+          class="matic-icon"
+        />
+      </div>
+      <div v-else>
+        <img
+          src="@/Common/Icons/matic2.png"
+          alt="maticIcon"
+          class="matic-icon"
+        />
+      </div>
       <div>{{ capitalizeFirstLetter(networkName) }} Network</div>
     </div>
     <div class="address">

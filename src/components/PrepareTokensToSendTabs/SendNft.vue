@@ -47,7 +47,7 @@ import ListTable from "@/components/ListTable.vue";
 import { useStore } from "vuex";
 import useMoralis from "@/composables/useMoralis";
 import useContracts from "@/composables/useContracts";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 
 export default {
   name: "SendNft",
@@ -66,19 +66,21 @@ export default {
       { key: "Collection_name", label: "Collection name" },
       { key: "NFT_ID", label: "NFT ID" },
     ]);
+
     const collectionAddress = ref("");
-    const spinner = ref(false);
+
     const getNftList = async () => {
+      const collectionAddressToSend = collectionAddress.value;
       const options = {
         chain: networkName?.value,
-        address: collectionAddress.value || address.value,
+        address: address.value,
       };
-      fetchNft(options);
+
+      await fetchNft({ options, collectionAddressToSend });
+
       collectionAddress.value = "";
     };
-    watch(nftList, (newValue) => {
-      newValue.length > 0 ? (spinner.value = false) : (spinner.value = true);
-    });
+
     return {
       getNftList,
       tableNftItems,

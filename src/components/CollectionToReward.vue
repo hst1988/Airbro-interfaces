@@ -44,7 +44,8 @@
           />
           <p class="info-text">
             Number of airdrop items is significantly lower than number of
-            potential receivers. Items will be assigned with the "first come, first served" logic.
+            potential receivers. Items will be assigned with the "first come,
+            first served" logic.
           </p>
         </div>
         <div class="info-box">

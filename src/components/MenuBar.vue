@@ -2,7 +2,7 @@
   <div class="menu-bar">
     <div class="logo-wrap">
       <img
-        src="@/Common/Icons/AirBroIconBlack.png"
+        src="@/Common/Icons/WebNavBarLogo.svg"
         alt="AirBroLogo"
         class="airbro-logo"
       />

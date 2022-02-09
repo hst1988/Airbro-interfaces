@@ -159,6 +159,48 @@ class EthereumService {
     }
     throw new Error("No network provider found!");
   }
+
+  async dropNewTokensToNftHolders(
+    rewardedNftCollection,
+    tokenName,
+    tokenSymbol,
+    tokenSypply
+  ) {
+    await this.checkCachedProvider();
+    if (Object.keys(this.networkProvider).length > 0) {
+      const provider = new ethers.providers.Web3Provider(this.networkProvider);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        this.airDropAddress,
+        this.dropAbi,
+        signer
+      );
+
+      let tx = null;
+      try {
+        tx = await contract.dropNewTokensToNftHolders(
+          rewardedNftCollection,
+          tokenName,
+          tokenSymbol,
+          tokenSypply
+        );
+        await tx.wait();
+        return tx;
+      } catch (error) {
+        if (error.reason === "repriced") {
+          const replacement = await provider.getTransaction(
+            error.replacement.hash
+          );
+          await replacement.wait();
+          return replacement;
+        }
+        return {
+          hash: "rejected",
+        };
+      }
+    }
+    throw new Error("No network provider found!");
+  }
 }
 
 export default EthereumService;

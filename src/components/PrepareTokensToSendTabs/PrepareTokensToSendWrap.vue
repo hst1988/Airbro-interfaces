@@ -35,6 +35,7 @@ import AppButton from "@/elements/AppButton.vue";
 import SendNft from "@/components/PrepareTokensToSendTabs/SendNft";
 import SendExistingToken from "@/components/PrepareTokensToSendTabs/SendExistingToken";
 import SendNewToken from "@/components/PrepareTokensToSendTabs/SendNewToken.vue";
+import { useStore } from "vuex";
 import { ref } from "vue";
 
 export default {
@@ -45,10 +46,14 @@ export default {
     SendNewToken,
   },
   setup() {
+    const store = useStore();
     const componentName = ref("SendNft");
 
     const changeComponent = (name) => {
       componentName.value = name;
+      store.dispatch("transactions/commitByKey", {
+        tokenToSendComponent: componentName.value,
+      });
     };
     return {
       componentName,

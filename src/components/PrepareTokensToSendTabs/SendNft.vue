@@ -47,7 +47,7 @@ import ListTable from "@/components/ListTable.vue";
 import { useStore } from "vuex";
 import useMoralis from "@/composables/useMoralis";
 import useContracts from "@/composables/useContracts";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 export default {
   name: "SendNft",
@@ -81,6 +81,9 @@ export default {
       collectionAddress.value = "";
     };
 
+    onMounted(() => {
+      store.dispatch("moralis/resetState");
+    });
     return {
       getNftList,
       tableNftItems,

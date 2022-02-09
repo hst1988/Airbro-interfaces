@@ -16,10 +16,15 @@
   }
   .create-token-button {
     padding: 12px 18px;
-    background: #797e84;
-    color: #b8c2c7;
+    background: #554CBF;
+    color: #FFFFFF;
     min-width: 210px;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 20px;
+    &:disabled {
+      background: #797e84;
+      cursor: default;
+      color: #b8c2c7;
+    }
   }
 }

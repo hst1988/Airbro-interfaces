@@ -27,7 +27,6 @@ import { ethereumService } from "@/main";
 import useContracts from "@/composables/useContracts";
 import AppButton from "@/elements/AppButton";
 import UserAddressAndBalance from "@/components/UserAddressAndBalance";
-// import { useRouter } from "vue-router";
 
 export default {
   name: "MenuBar",
@@ -37,20 +36,12 @@ export default {
   },
   setup() {
     const store = useStore();
-    // const router = useRouter();
     const { loginOrSignUp } = useContracts(store, ethereumService);
     const address = computed(() => store.getters["contracts/getAddress"]);
-
-    // const disconnect = async () => {
-    //   await store.dispatch("contracts/resetState");
-    //   await ethereumService.disconnectProvider();
-    //   await router.push("/");
-    // };
 
     return {
       loginOrSignUp,
       address,
-      // disconnect,
     };
   },
 };

@@ -5,6 +5,7 @@ const initialState = () => ({
   isTarnsationSuccess: false,
   isTransactionFinished: true,
   txHash: "",
+  tokenToSendComponent: "SendNft",
 });
 const state = initialState();
 
@@ -50,6 +51,9 @@ const mutations = {
   },
 };
 const actions = {
+  resetState({ commit }) {
+    commit("resetState");
+  },
   commitByKey({ commit }, object) {
     commit("commitByKey", object);
   },
@@ -72,6 +76,25 @@ const actions = {
         newNftCollectionSymbol,
         newNftSupply,
         baseUri
+      );
+      commit("setTxHash", txHash.hash);
+      return txHash;
+    } catch (error) {
+      commit("pushError", error);
+    }
+  },
+
+  async dropNewTokensToNftHolders(
+    { commit },
+    { rewardedNftCollection, newTokenName, newTokenSymbol, newTokenSypply }
+  ) {
+    try {
+      commit("setIsTransactionFinished", false);
+      const txHash = await ethereumService.dropNewTokensToNftHolders(
+        rewardedNftCollection,
+        newTokenName,
+        newTokenSymbol,
+        newTokenSypply
       );
       commit("setTxHash", txHash.hash);
       return txHash;

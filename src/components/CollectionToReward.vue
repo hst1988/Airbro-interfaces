@@ -36,7 +36,13 @@
             :fields="tableFields"
           />
         </div>
-        <div class="info" v-if="nftListTotal < addresesToRewardTotalItems[0]">
+        <div
+          class="info"
+          v-if="
+            nftListTotal < addresesToRewardTotalItems[0] &&
+            tokenToSendComponent === 'SendNft'
+          "
+        >
           <img
             src="@/Common/Icons/toolTipIcon.png"
             alt="info-icon"
@@ -49,10 +55,18 @@
           </p>
         </div>
         <div class="info-box">
-          <span v-if="tableListLength">
+          <span v-if="tableListLength && tokenToSendComponent === 'SendNft'">
             Drop {{ nftListTotal }} items to
             {{ addresesToRewardTotalItems[0] }}
             addresses</span
+          >
+          <span
+            v-if="tableListLength && tokenToSendComponent === 'SendNewToken'"
+          >
+            Drop {{ newTokenSupply }} {{ newTokenSymbol }} to
+            {{ addresesToRewardTotalItems[0] }}
+            addresses ({{ tokensPerAddress }} {{ newTokenSymbol }} per
+            address)</span
           >
         </div>
         <div>
@@ -74,6 +88,8 @@ import ListTable from "@/components/ListTable.vue";
 import { useStore } from "vuex";
 import useMoralis from "@/composables/useMoralis";
 import useContracts from "@/composables/useContracts";
+import useTransactions from "@/composables/useTransactions";
+import useSendNewToken from "@/composables/useSendNewToken";
 import { computed, ref } from "vue";
 
 export default {
@@ -90,7 +106,12 @@ export default {
       nftListTotal,
       addresesToRewardTotalItems,
     } = useMoralis(store);
+
     const { networkName } = useContracts(store);
+
+    const { tokenToSendComponent } = useTransactions(store);
+
+    const { newTokenSymbol, newTokenSupply } = useSendNewToken(store);
 
     const rewardAddress = ref("");
     const tableFields = ref([
@@ -111,6 +132,13 @@ export default {
       rewardAddress.value = "";
     };
 
+    const tokensPerAddress = computed(() => {
+      let tokens = parseFloat(
+        newTokenSupply.value / addresesToRewardTotalItems.value[0]
+      ).toFixed(4);
+      return tokens;
+    });
+
     return {
       addAddressToReward,
       rewardAddress,
@@ -119,6 +147,10 @@ export default {
       nftListTotal,
       tableAddressesToRewardList,
       addresesToRewardTotalItems,
+      newTokenSymbol,
+      newTokenSupply,
+      tokenToSendComponent,
+      tokensPerAddress,
     };
   },
 };

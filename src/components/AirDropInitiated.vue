@@ -21,6 +21,8 @@
       </div>
       <div>
         <app-button
+          v-if="tokenToSendComponent === 'SendNft'"
+          id="SendNft"
           text="Complete the drop"
           class="complete-drop-button"
           :disabled="tableAddressesToRewardList.length === 0"
@@ -34,6 +36,21 @@
             )
           "
         />
+        <app-button
+          v-if="tokenToSendComponent === 'SendNewToken'"
+          id="SendNewToken"
+          text="Complete the drop"
+          class="complete-drop-button"
+          :disabled="tableAddressesToRewardList.length === 0"
+          @click="
+            dropNewTokensToNftHolders(
+              rewardedNftCollection,
+              newTokenName,
+              newTokenSymbol,
+              newTokenSupply
+            )
+          "
+        />
       </div>
     </div>
   </div>
@@ -42,6 +59,7 @@
 import AppButton from "@/elements/AppButton";
 import { useStore } from "vuex";
 import useTransactions from "@/composables/useTransactions";
+import useSendNewToken from "@/composables/useSendNewToken";
 import useMoralis from "@/composables/useMoralis";
 import useContracts from "@/composables/useContracts";
 import { ref, computed } from "vue";
@@ -52,8 +70,17 @@ export default {
   },
   setup() {
     const store = useStore();
-    const { rewardNftToNftHolders, txHash, isTransactionFinished } =
-      useTransactions(store);
+    const {
+      rewardNftToNftHolders,
+      dropNewTokensToNftHolders,
+      txHash,
+      isTransactionFinished,
+      tokenToSendComponent,
+    } = useTransactions(store);
+
+    const { newTokenName, newTokenSymbol, newTokenSupply } =
+      useSendNewToken(store);
+
     const {
       addresesToReward,
       nftListTotal,
@@ -61,6 +88,7 @@ export default {
       giftCollectionName,
       tableAddressesToRewardList,
     } = useMoralis(store);
+
     const { networkName } = useContracts(store);
 
     const baseUri = ref("https://ipfs.moralis.io:2053/ipfs/");
@@ -82,6 +110,11 @@ export default {
       txHash,
       isTransactionFinished,
       tableAddressesToRewardList,
+      tokenToSendComponent,
+      newTokenName,
+      newTokenSymbol,
+      newTokenSupply,
+      dropNewTokensToNftHolders,
     };
   },
 };

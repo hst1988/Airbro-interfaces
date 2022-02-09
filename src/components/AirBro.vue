@@ -3,7 +3,7 @@
     <div class="air-bro-wrap">
       <p class="air-bro">AirBro</p>
       <p class="secondary-text">
-        Easiest way to reward owners of the NFTs.Airdrop your new NFTs or tokens
+        Easiest way to reward owners of the NFTs. Airdrop your new NFTs or tokens
         to them with just couple of clicks.
       </p>
       <app-button
